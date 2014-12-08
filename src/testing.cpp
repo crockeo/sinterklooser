@@ -9,6 +9,7 @@
 // Code //
 
 void testGraph() {
+    std::cout << "TEST 01\n";
     int len = 5;
     std::string* names = new std::string[len];
 
@@ -32,11 +33,16 @@ void testGraph() {
 }
 
 void loadGraph() {
+    std::cout << "TEST 02\n";
+    std::string path = path;
+
     Graph* g = loadGraph("examples/data01.txt");
 
     if (g != nullptr) {
         coutGraph(g);
         delete g;
+    } else {
+        std::cerr << "Could not load '" << path << "'!\n";
     }
 }
 
