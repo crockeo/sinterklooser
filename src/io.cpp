@@ -42,7 +42,7 @@ int saveGraph(std::string path, Graph* g) {
 // Writing a graph to std out.
 int coutGraph(Graph* g) {
     for (int i = 0; i < g->getLength(); i++) {
-        std::cout << "Cerek knows:\n";
+        std::cout << g->getName(i) << " knows:\n";
         for (int j = 0; j < g->getLength(); j++) {
             if (i == j)
                 continue;

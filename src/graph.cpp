@@ -44,11 +44,13 @@ Graph::~Graph() {
 // Connecting two nodes on the graph.
 void Graph::connect(int n1, int n2) {
     this->nodes[n1].connect(&this->nodes[n2]);
+    this->nodes[n2].connect(&this->nodes[n1]);
 }
 
 // Disconnecting two nodes on the graph.
 void Graph::disconnect(int n1, int n2) {
     this->nodes[n1].disconnect(&this->nodes[n2]);
+    this->nodes[n2].disconnect(&this->nodes[n1]);
 }
 
 // Checking if two nodes on the graph are connected.
