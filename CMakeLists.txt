@@ -9,6 +9,7 @@ set(LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/build/lib")
 
 # Setting up the target executable.
 add_executable(sinterklooser src/main.cpp)
+add_executable(testing src/testing.cpp)
 
 # Setting the C++11 flag.
 set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
@@ -19,3 +20,4 @@ add_library(sinterklooser-library "src/graph.cpp"
                                   "src/io.cpp")
 
 target_link_libraries(sinterklooser sinterklooser-library)
+target_link_libraries(testing sinterklooser-library)
