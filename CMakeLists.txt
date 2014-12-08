@@ -15,6 +15,7 @@ set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 
 # Setting up my own libraries.
 add_library(sinterklooser-library "src/graph.cpp"
-                                  "src/node.cpp")
+                                  "src/node.cpp"
+                                  "src/io.cpp")
 
 target_link_libraries(sinterklooser sinterklooser-library)
