@@ -64,5 +64,8 @@ int Graph::getLength() { return this->length; };
 // Getting the name of a node.
 std::string Graph::getName(int index) { return this->names[index]; }
 
+// Getting all of the names.
+std::string* Graph::getNames() { return this->names; }
+
 // Getting a specific node.
 Node Graph::getNode(int index) { return this->nodes[index]; }

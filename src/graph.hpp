@@ -36,6 +36,9 @@ public:
     // Getting the name of a node.
     std::string getName(int);
 
+    // Getting all of the names.
+    std::string* getNames();
+
     // Getting a specific node.
     Node getNode(int);
 private:

@@ -15,7 +15,8 @@ add_executable(testing src/testing.cpp)
 set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 
 # Setting up my own libraries.
-add_library(sinterklooser-library "src/graph.cpp"
+add_library(sinterklooser-library "src/processing.cpp"
+								  "src/graph.cpp"
                                   "src/node.cpp"
                                   "src/io.cpp")
 
