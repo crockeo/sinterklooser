@@ -4,6 +4,7 @@
 // Includes //
 #include <iostream>
 #include <fstream>
+#include <string>
 
 #include "graph.hpp"
 
@@ -12,8 +13,50 @@
 
 // Loading a graph from a file.
 Graph* loadGraph(std::string path) {
-    // TODO: load the graph.
-    return 0;
+    std::ifstream in;
+    in.open(path);
+
+    if (!in.good())
+        return nullptr;
+
+    std::string line;
+    int len;
+
+    in >> len;
+    in >> line;
+
+    if (line.compare("NAMES") != 0) {
+        in.close();
+        return nullptr;
+    }
+
+    std::string* names = new std::string[len];
+    for (int i = 0; i < len; i++) {
+        in >> line;
+        in >> line;
+
+        names[i] = line;
+    }
+
+    in >> line;
+    if (line.compare("CONNS") != 0) {
+        in.close();
+        delete[] names;
+        return nullptr;
+    }
+
+    Graph* g = new Graph(names, len);
+
+    int t1, t2;
+    while (!in.eof()) {
+        in >> t1;
+        in >> t2;
+
+        g->connect(t1, t2);
+    }
+
+    in.close();
+    return g;
 }
 
 // Saving a graph to the file system.
@@ -35,6 +78,8 @@ int saveGraph(std::string path, Graph* g) {
         for (int j = 0; j < g->getLength(); j++)
             if (g->areConnected(i, j))
                 out << i << " " << j << "\n";
+
+    out.close();
 
     return 0;
 }

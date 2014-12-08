@@ -34,9 +34,9 @@ void testGraph() {
 
 void loadGraph() {
     std::cout << "TEST 02\n";
-    std::string path = path;
+    std::string path = "examples/data01.txt";
 
-    Graph* g = loadGraph("examples/data01.txt");
+    Graph* g = loadGraph(path);
 
     if (g != nullptr) {
         coutGraph(g);
