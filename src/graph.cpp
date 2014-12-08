@@ -58,3 +58,9 @@ bool Graph::areConnected(int n1, int n2) {
 
 // Getting the length of the graph.
 int Graph::getLength() { return this->length; };
+
+// Getting the name of a node.
+std::string Graph::getName(int index) { return this->names[index]; }
+
+// Getting a specific node.
+Node Graph::getNode(int index) { return this->nodes[index]; }

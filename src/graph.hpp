@@ -32,6 +32,12 @@ public:
 
     // Getting the length of the graph.
     int getLength();
+
+    // Getting the name of a node.
+    std::string getName(int);
+
+    // Getting a specific node.
+    Node getNode(int);
 private:
     int length;
     std::string* names;
