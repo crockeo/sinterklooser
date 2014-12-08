@@ -11,6 +11,10 @@
 // A class to represent a digital graph.
 class Graph {
 public:
+    // Creating a graph with size n, no connections, and with every name mapped
+    // to their respective node.
+    Graph(std::string*, int);
+
     // Creating a graph with size n and no connections.
     Graph(int);
 
@@ -30,6 +34,7 @@ public:
     int getLength();
 private:
     int length;
+    std::string* names;
     Node* nodes;
 };
 

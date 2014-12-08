@@ -2,18 +2,38 @@
 
 //////////////
 // Includes //
+#include <string>
+
 #include "node.hpp"
 
 //////////
 // Code //
 
+// Creating a graph with size n, no connections, and with every name mapped
+// to their respective node.
+Graph::Graph(std::string* names, int length) {
+    this->length = length;
+
+    this->names = new std::string[this->getLength()];
+    this->nodes = new Node[this->getLength()];
+
+    for (int i = 0; i < this->getLength(); i++) {
+        this->names[i] = names[i];
+        this->nodes[i] = Node(i);
+    }
+}
+
 // Creating a graph with size n and no connections.
 Graph::Graph(int length) {
     this->length = length;
 
+    this->names = new std::string[this->getLength()];
     this->nodes = new Node[this->getLength()];
-    for (int i = 0; i < this->getLength(); i++)
+
+    for (int i = 0; i < this->getLength(); i++) {
+        this->names[i] = "No name.";
         this->nodes[i] = Node(i);
+    }
 }
 
 // Deleting the graph.
