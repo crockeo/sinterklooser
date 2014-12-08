@@ -2,24 +2,29 @@
 
 //////////////
 // Includes //
-#include "array.hpp"
+#include <set>
 
 //////////
 // Code //
 
-// Creating a node from a set of nodes.
-Node::Node(Array<Node*> connections) {
-    this->connections = new Array<Node*>(connections.getSize());
-    for (int i = 0; i < connections.getLength(); i++)
-        this->connections->pushRight(connections[i]);
+// Creating a node without any connections.
+Node::Node(int id) {
+    this->id = id;
+    this->nodes = new std::set<Node*>;
 }
 
-// Creating a node without any connections.
+// Creating a node without any connections and with the default ID.
 Node::Node() {
-    this->connections = new Array<Node*>;
+    this->id = 0;
+    this->nodes = new std::set<Node*>;
 }
 
 // Connecting this node with another node.
 void Node::connect(Node* node) {
-    this->connections->pushRight(node);
+    this->nodes->insert(node);
+}
+
+// Disconnecting this node from another node.
+void Node::disconnect(Node* node) {
+    this->nodes->erase(node);
 }

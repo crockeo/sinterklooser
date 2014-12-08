@@ -3,24 +3,30 @@
 
 //////////////
 // Includes //
-#include "array.hpp"
+#include <set>
 
 //////////
 // Code //
 
 // A type to represent a node in a given graph.
 struct Node {
-    // Creating a node from a set of nodes.
-    Node(Array<Node*>);
-
     // Creating a node without any connections.
+    Node(int);
+
+    // Creating a node without any connections and with the default ID.
     Node();
 
     // Connecting this node with another node.
     void connect(Node*);
 
-    // The array of connections that exist from this node.
-    Array<Node*>* connections;
+    // Disconnecting this node from another node.
+    void disconnect(Node*);
+
+    // The unique ID of the Node.
+    int id;
+
+    // The set of nodes that this is connected to.
+    std::set<Node*>* nodes;
 };
 
 #endif
