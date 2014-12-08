@@ -19,7 +19,7 @@ template <class T>
 Array<T>::Array(int size) {
     this->size = size;
     this->length = 0;
-    this->ts = new T[this->gxetSize()];
+    this->ts = new T[this->getSize()];
 }
 
 // Constructing an array with the default size (of 2).
