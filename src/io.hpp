@@ -13,13 +13,10 @@
 // Loading a graph from a file.
 Graph* loadGraph(std::string);
 
-// Writing a graph to an ostream.
-void writeGraph(std::ostream out, Graph*);
-
 // Saving a graph to the file system.
-void saveGraph(std::string, Graph*);
+int saveGraph(std::string, Graph*);
 
 // Writing a graph to std out.
-void coutGraph(Graph*);
+int coutGraph(Graph*);
 
 #endif
