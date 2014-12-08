@@ -20,3 +20,7 @@ want to run the program on it:
 ```bash
 $ ./build/bin/sinterklooser <path/to/file>
 ```
+
+### LICENSE
+
+For licensing information, refer to the `LICENSE` file contained in this repo.
