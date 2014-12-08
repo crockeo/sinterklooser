@@ -1,7 +1,0 @@
-#include "graph.hpp"
-
-//////////////
-// Includes //
-
-//////////
-// Code //
