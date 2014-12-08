@@ -18,7 +18,24 @@ Graph* loadGraph(std::string path) {
 
 // Saving a graph to the file system.
 int saveGraph(std::string path, Graph* g) {
-    // TODO: Save the graph.
+    std::ofstream out;
+    out.open(path);
+
+    if (!out.good())
+        return -1;
+
+    out << g->getLength() << "\n";
+
+    out << "NAMES\n";
+    for (int i = 0; i < g->getLength(); i++)
+        out << i << " " << g->getName(i) << "\n";
+
+    out << "CONNS\n";
+    for (int i = 0; i < g->getLength(); i++)
+        for (int j = 0; j < g->getLength(); j++)
+            if (g->areConnected(i, j))
+                out << i << " " << j << "\n";
+
     return 0;
 }
 
