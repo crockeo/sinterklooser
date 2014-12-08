@@ -21,18 +21,29 @@ void testGraph() {
     Graph* g = new Graph(names, len);
     delete[] names;
 
-    g->connect(1, 2);
-    g->connect(0, 3);
-    g->connect(3, 4);
+    for (int i = 0; i < g->getLength(); i++)
+        for (int j = 0; j < g->getLength(); j++)
+            if (i != j)
+                g->connect(i, j);
 
     coutGraph(g);
 
     delete g;
 }
 
+void loadGraph() {
+    Graph* g = loadGraph("examples/data01.txt");
+
+    if (g != nullptr) {
+        coutGraph(g);
+        delete g;
+    }
+}
+
 int main() {
     // Testing some stuff about the graph.
     testGraph();
 
-    std::cout << "Hello world!\n";
+    // Testing loading a graph from the file system.
+    loadGraph();
 }
