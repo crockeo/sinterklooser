@@ -48,7 +48,7 @@ void Graph::connectDir(int n1, int n2) {
 
 // Disconnecting in one direction.
 void Graph::disconnectDir(int n1, int n2) {
-    this->nodes[n1].disconnect(&this->nodes[2]);
+    this->nodes[n1].disconnect(&this->nodes[n2]);
 }
 
 // Connecting two nodes on the graph.

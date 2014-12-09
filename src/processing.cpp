@@ -50,12 +50,12 @@ std::vector<std::tuple<int, int>> findPairing(Graph* g) {
 
     std::vector<std::tuple<int, int>> pairs;
     for (int i = 0; i < copy->getLength(); i++) {
-        std::vector<int> nodes = findNodes(g, i);
-
-        pairs.push_back(make_tuple(i, nodes[randMax(nodes.size())]));
+        std::vector<int> nodes = findNodes(copy, i);
+        int target = nodes[randMax(nodes.size())];
+        pairs.push_back(make_tuple(i, target));
 
         for (int j = 0; j < copy->getLength(); j++)
-            copy->disconnect(i, j);
+            copy->disconnectDir(j, target);
     }
 
     delete copy;
