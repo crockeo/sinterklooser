@@ -21,6 +21,12 @@ public:
     // Deleting the graph.
     ~Graph();
 
+    // Connecting in one direction.
+    void connectDir(int, int);
+
+    // Disconnecting in one direction.
+    void disconnectDir(int, int);
+
     // Connecting two nodes on the graph.
     void connect(int, int);
 

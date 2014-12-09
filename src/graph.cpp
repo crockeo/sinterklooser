@@ -41,16 +41,26 @@ Graph::~Graph() {
     delete[] this->nodes;
 }
 
+// Connecting in one direction.
+void Graph::connectDir(int n1, int n2) {
+    this->nodes[n1].connect(&this->nodes[n2]);
+}
+
+// Disconnecting in one direction.
+void Graph::disconnectDir(int n1, int n2) {
+    this->nodes[n1].disconnect(&this->nodes[2]);
+}
+
 // Connecting two nodes on the graph.
 void Graph::connect(int n1, int n2) {
-    this->nodes[n1].connect(&this->nodes[n2]);
-    this->nodes[n2].connect(&this->nodes[n1]);
+    this->connectDir(n1, n2);
+    this->connectDir(n2, n1);
 }
 
 // Disconnecting two nodes on the graph.
 void Graph::disconnect(int n1, int n2) {
-    this->nodes[n1].disconnect(&this->nodes[n2]);
-    this->nodes[n2].disconnect(&this->nodes[n1]);
+    this->disconnectDir(n1, n2);
+    this->disconnectDir(n2, n1);
 }
 
 // Checking if two nodes on the graph are connected.
