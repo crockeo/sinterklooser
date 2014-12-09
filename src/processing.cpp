@@ -1,7 +1,22 @@
 #include "processing.hpp"
 
+//////////////
+// Includes //
+#include <stdlib.h>
+#include <vector>
+#include <tuple>
+
+#include "node.hpp"
+
 //////////
 // Code //
+
+using std::make_tuple;
+using std::vector;
+using std::tuple;
+
+// Getting a random number with a max value.
+int randMax(int n) { return rand() % n; }
 
 // Making a copy of a graph.
 Graph* copyGraph(Graph* g) {
@@ -15,11 +30,31 @@ Graph* copyGraph(Graph* g) {
     return copy;
 }
 
-// Determining the list of pairs for Sinterklaas.
-std::tuple<int, int>* findPairing(Graph* g) {
-    Graph* copy = copyGraph(g);
-    delete copy;
+// Creating an array of nodes that are connected to another node.
+std::vector<int> findNodes(Graph* g, int i) {
+    std::vector<int> nodes;
 
-    // TODO: Actually do something
-    return nullptr;
+    for (int j = 0; j < g->getLength(); j++)
+        if (g->areConnected(i, j))
+            nodes.push_back(j);
+
+    return nodes;
+}
+
+// Determining the list of pairs for Sinterklaas.
+std::vector<std::tuple<int, int>> findPairing(Graph* g) {
+    Graph* copy = copyGraph(g);
+
+    std::vector<std::tuple<int, int>> pairs;
+    for (int i = 0; i < copy->getLength(); i++) {
+        std::vector<int> nodes = findNodes(g, i);
+
+        pairs.push_back(make_tuple(i, nodes[randMax(nodes.size())]));
+
+        for (int j = 0; j < copy->getLength(); j++)
+            copy->disconnect(i, j);
+    }
+
+    delete copy;
+    return pairs;
 }

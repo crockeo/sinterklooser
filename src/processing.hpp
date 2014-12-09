@@ -3,6 +3,7 @@
 
 //////////////
 // Includes //
+#include <vector>
 #include <tuple>
 
 #include "graph.hpp"
@@ -11,6 +12,6 @@
 // Code //
 
 // Determining the list of pairs for Sinterklaas.
-std::tuple<int, int>* findPairing(Graph*);
+std::vector<std::tuple<int, int>> findPairing(Graph*);
 
 #endif
