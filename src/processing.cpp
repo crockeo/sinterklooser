@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <vector>
 #include <tuple>
+#include <set>
 
 #include "graph.hpp"
 #include "node.hpp"
@@ -17,6 +18,7 @@ using std::make_tuple;
 using std::vector;
 using std::tuple;
 using std::get;
+using std::set;
 
 // Getting a random number with a max value.
 int randMax(int n) { return rand() % n; }
@@ -44,6 +46,22 @@ std::vector<int> findNodes(Graph* g, int i) {
     return nodes;
 }
 
+vector<int> findOpen(Graph* g) {
+    vector<int> opens;
+    set<int> added;
+
+    for (int i = 0; i < g->getLength(); i++) {
+        for (int j = 0; j < g->getLength(); j++) {
+            if (g->areConnected(i, j) && added.count(j) == 0) {
+                opens.push_back(j);
+                added.insert(j);
+            }
+        }
+    }
+
+    return opens;
+}
+
 // Determining the list of pairs for Sinterklaas.
 std::vector<std::tuple<int, int>> findPairing(Graph* g) {
     Graph* copy = copyGraph(g);
@@ -51,7 +69,14 @@ std::vector<std::tuple<int, int>> findPairing(Graph* g) {
     std::vector<std::tuple<int, int>> pairs;
     for (int i = 0; i < copy->getLength(); i++) {
         std::vector<int> nodes = findNodes(copy, i);
-        int target = nodes[randMax(nodes.size())];
+        int target;
+
+        if (nodes.size() == 0) {
+            std::vector<int> opens = findOpen(copy);
+            target = opens[randMax(opens.size())];
+        } else
+            target = nodes[randMax(nodes.size())];
+
         pairs.push_back(make_tuple(i, target));
 
         for (int j = 0; j < copy->getLength(); j++)

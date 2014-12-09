@@ -37,7 +37,7 @@ void testGraph() {
 
 void loadGraph() {
     std::cout << "TEST 02\n";
-    std::string path = "examples/data01.txt";
+    std::string path = "examples/data02.txt";
 
     Graph* g = loadGraph(path);
 
@@ -51,7 +51,7 @@ void loadGraph() {
 
 void testProcess() {
     std::cout << "TEST 03\n";
-    std::string path = "examples/data02.txt";
+    std::string path = "examples/data01.txt";
 
     Graph* g = loadGraph(path);
 
