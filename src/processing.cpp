@@ -2,6 +2,7 @@
 
 //////////////
 // Includes //
+#include <iostream>
 #include <stdlib.h>
 #include <vector>
 #include <tuple>
@@ -14,6 +15,7 @@
 using std::make_tuple;
 using std::vector;
 using std::tuple;
+using std::get;
 
 // Getting a random number with a max value.
 int randMax(int n) { return rand() % n; }
@@ -57,4 +59,11 @@ std::vector<std::tuple<int, int>> findPairing(Graph* g) {
 
     delete copy;
     return pairs;
+}
+
+// Printing out the set of pairings.
+void printPairing(Graph* g, std::vector<std::tuple<int, int>> pairs) {
+    std::cout << "Pairing list:\n";
+    for (int i = 0; i < pairs.size(); i++)
+        std::cout << "  " << g->getName(get<0>(pairs[i])) << " gets " << g->getName(get<1>(pairs[i])) << "!\n";
 }

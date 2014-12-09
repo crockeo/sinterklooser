@@ -60,9 +60,7 @@ void testProcess() {
         return;
     }
 
-    std::vector<std::tuple<int, int>> pairs = findPairing(g);
-    for (int i = 0; i < pairs.size(); i++)
-        std::cout << std::get<0>(pairs[i]) << " " << std::get<1>(pairs[i]) << "\n";
+    printPairing(g, findPairing(g));
 
     delete g;
 }
