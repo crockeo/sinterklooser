@@ -5,18 +5,18 @@
 // Includes //
 #include <string>
 
-#include "graph.hpp"
+#include "digraph.hpp"
 
 //////////
 // Code //
 
 // Loading a graph from a file.
-Graph* loadGraph(std::string);
+Digraph* loadDigraph(std::string);
 
 // Saving a graph to the file system.
-int saveGraph(std::string, Graph*);
+int saveDigraph(std::string, Digraph*);
 
 // Writing a graph to std out.
-int coutGraph(Graph*);
+int coutDigraph(Digraph*);
 
 #endif

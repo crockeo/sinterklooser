@@ -71,3 +71,13 @@ void Digraph::disconnectBoth(int src, int dst) {
 std::string Digraph::getName(int index) {
     return this->names->at(index);
 }
+
+// Getting all of the names.
+std::vector<std::string> Digraph::getNames() {
+    return *this->names;
+}
+
+// Getting all of the edges.
+std::set<Edge> Digraph::getEdges() {
+    return *this->edges;
+}

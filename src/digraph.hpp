@@ -44,6 +44,12 @@ public:
     // doesn't exist.
     std::string getName(int);
 
+    // Getting all of the names.
+    std::vector<std::string> getNames();
+
+    // Getting all of the edges.
+    std::set<Edge> getEdges();
+
 private:
     std::vector<std::string>* names;
     std::set<Edge>* edges;

@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "processing.hpp"
-#include "graph.hpp"
+#include "digraph.hpp"
 #include "io.hpp"
 
 //////////
@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    Graph* g = loadGraph(std::string(argv[1]));
+    Digraph* g = loadDigraph(std::string(argv[1]));
     
     if (g == nullptr) {
         std::cerr << "Could not load the file " << argv[1] << "!\n";

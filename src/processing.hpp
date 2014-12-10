@@ -6,15 +6,15 @@
 #include <vector>
 #include <tuple>
 
-#include "graph.hpp"
+#include "digraph.hpp"
 
 //////////
 // Code //
 
 // Determining the list of pairs for Sinterklaas.
-std::vector<std::tuple<int, int>> findPairing(Graph*);
+std::vector<std::tuple<int, int>> findPairing(Digraph*);
 
 // Printing out the set of pairings.
-void printPairing(Graph*, std::vector<std::tuple<int, int>>);
+void printPairing(Digraph*, std::vector<std::tuple<int, int>>);
 
 #endif
