@@ -36,12 +36,12 @@ Digraph::~Digraph() {
 // exists, it should return 0.
 int Digraph::connection(int src, int dst) {
     std::set<Edge>::iterator loc;
-    loc = this->edges.find(Edge(src, dst, 0));
+    loc = this->edges->find(Edge(src, dst, 0));
 
-    if (loc == std::set<Edge>::end)
+    if (loc == this->edges->end())
         return 0;
 
-    return *it.weight;
+    return (*loc).weight;
 }
 
 // Connecting one node to another.
