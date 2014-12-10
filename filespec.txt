@@ -13,7 +13,7 @@ NAMES
 CONNS
 # The 'n's in the following should specify which people are to be treated as
 # connected in this problem.
-<person id n> <person id n>
-<person id n> <person id n>
-<person id n> <person id n>
+<person id n> <person id n> <connection weight>
+<person id n> <person id n> <connection weight>
+<person id n> <person id n> <connection weight>
 # etc.

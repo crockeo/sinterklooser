@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <set>
 
 #include "digraph.hpp"
 
@@ -19,6 +20,22 @@ Digraph* loadDigraph(std::string path) {
 
 // Saving a graph to the file system.
 int saveDigraph(std::string path, Digraph* graph) {
+    std::ofstream out(path);
+
+    if (!out.good())
+        return -1;
+
+    out << graph->getNames().size() << "\n";
+
+    out << "NAMES\n";
+    for (int i = 0; i < graph->getNames().size(); i++)
+        out << graph->getName(i) << "\n";
+
+    out << "CONNS\n";
+    std::set<Edge> edges = graph->getEdges();
+    for (std::set<Edge>::iterator it = edges.begin(); it != edges.end(); it++)
+        out << it->src << " " << it->dst << " " << it->weight << "\n";
+
     return 0;
 }
 
@@ -85,31 +102,6 @@ int coutDigraph(Digraph* graph) {
 
     //in.close();
     //return g;
-//}
-
-//// Saving a graph to the file system.
-//int saveGraph(std::string path, Graph* g) {
-    //std::ofstream out;
-    //out.open(path);
-
-    //if (!out.good())
-        //return -1;
-
-    //out << g->getLength() << "\n";
-
-    //out << "NAMES\n";
-    //for (int i = 0; i < g->getLength(); i++)
-        //out << i << " " << g->getName(i) << "\n";
-
-    //out << "CONNS\n";
-    //for (int i = 0; i < g->getLength(); i++)
-        //for (int j = 0; j < g->getLength(); j++)
-            //if (g->areConnected(i, j))
-                //out << i << " " << j << "\n";
-
-    //out.close();
-
-    //return 0;
 //}
 
 //// Writing a graph to std out.
