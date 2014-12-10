@@ -12,10 +12,56 @@
 //////////
 // Code //
 
-
 // Loading a graph from a file.
 Digraph* loadDigraph(std::string path) {
-    return nullptr;
+    std::ifstream in(path);
+
+    if (!in.good())
+        return nullptr;
+
+    std::string line;
+    int len;
+    int src, dst, weight;
+
+    // Reading in the file header.
+    in >> line;
+    if (line.compare("SS") != 0)
+        return nullptr;
+
+    // Getting the length.
+    in >> len;
+
+    // Reading in the NAMES header.
+    in >> line;
+    if (line.compare("NAMES") != 0)
+        return nullptr;
+
+    // Reading in the names.
+    std::vector<std::string> names;
+    for (int i = 0; i < len; i++) {
+        in >> line;
+        in >> line;
+
+        names.push_back(line);
+    }
+
+    Digraph* graph = new Digraph(names);
+
+    // Reading in the CONNS header.
+    in >> line;
+    if (line.compare("CONNS") != 0)
+        return nullptr;
+
+    // Reading in the connections.
+    while (!in.eof()) {
+        in >> src;
+        in >> dst;
+        in >> weight;
+
+        graph->connect(src, dst, weight);
+    }
+
+    return graph;
 }
 
 // Saving a graph to the file system.
@@ -42,7 +88,7 @@ int saveDigraph(std::string path, Digraph* graph) {
 // Writing a graph to std out.
 int coutDigraph(Digraph* graph) {
     std::set<Edge> edges = graph->getEdges();
-    
+
     std::cout << "Graph report!\n";
     for (std::set<Edge>::iterator it = edges.begin(); it != edges.end(); it++) {
         Edge e = *it;
@@ -55,68 +101,3 @@ int coutDigraph(Digraph* graph) {
 
     return 0;
 }
-
-//// Loading a graph from a file.
-//Graph* loadGraph(std::string path) {
-    //std::ifstream in;
-    //in.open(path);
-
-    //if (!in.good())
-        //return nullptr;
-
-    //std::string line;
-    //int len;
-
-    //in >> len;
-    //in >> line;
-
-    //if (line.compare("NAMES") != 0) {
-        //in.close();
-        //return nullptr;
-    //}
-
-    //std::string* names = new std::string[len];
-    //for (int i = 0; i < len; i++) {
-        //in >> line;
-        //in >> line;
-
-        //names[i] = line;
-    //}
-
-    //in >> line;
-    //if (line.compare("CONNS") != 0) {
-        //in.close();
-        //delete[] names;
-        //return nullptr;
-    //}
-
-    //Graph* g = new Graph(names, len);
-
-    //int t1, t2;
-    //while (!in.eof()) {
-        //in >> t1;
-        //in >> t2;
-
-        //g->connect(t1, t2);
-    //}
-
-    //in.close();
-    //return g;
-//}
-
-//// Writing a graph to std out.
-//int coutGraph(Graph* g) {
-    //for (int i = 0; i < g->getLength(); i++) {
-        //std::cout << g->getName(i) << " knows:\n";
-        //for (int j = 0; j < g->getLength(); j++) {
-            //if (i == j)
-                //continue;
-            //if (g->areConnected(i, j))
-                //std::cout << " - " << g->getName(j) << "\n";
-        //}
-
-        //std::cout << "---\n\n";
-    //}
-
-    //return 0;
-//}

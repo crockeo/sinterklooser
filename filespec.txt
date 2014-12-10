@@ -4,6 +4,7 @@ a '#' are to be treated as comments.
 
 ---
 
+SS
 <number of people>
 NAMES
 <person id 1> <person name 1>
