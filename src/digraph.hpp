@@ -24,6 +24,10 @@ public:
     // Destroying a Digraph.
     ~Digraph();
 
+    // Finding the weight of the connection between two nodes. If no connection
+    // exists, it should return 0.
+    int connection(int, int);
+
     // Connecting one node to another.
     void connect(int, int, int);
 

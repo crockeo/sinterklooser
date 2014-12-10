@@ -32,6 +32,18 @@ Digraph::~Digraph() {
     delete this->edges;
 }
 
+// Finding the weight of the connection between two nodes. If no connection
+// exists, it should return 0.
+int Digraph::connection(int src, int dst) {
+    std::set<Edge>::iterator loc;
+    loc = this->edges.find(Edge(src, dst, 0));
+
+    if (loc == std::set<Edge>::end)
+        return 0;
+
+    return *it.weight;
+}
+
 // Connecting one node to another.
 void Digraph::connect(int src, int dst, int weight) {
     this->edges->insert(Edge(src, dst, weight));
