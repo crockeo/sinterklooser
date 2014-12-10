@@ -9,6 +9,10 @@ Edge::Edge(int src, int dst, int weight) {
 
 // Comparing two edges.
 bool operator<(const Edge& e1, const Edge& e2) {
-    return e1.src < e2.src &&
-           e1.dst < e2.dst;
+    if (e1.src < e2.src)
+        return true;
+    else if (e1.src == e2.src)
+        return e1.dst < e2.dst;
+    else
+        return false;
 }
