@@ -46,18 +46,12 @@ std::vector<int> findNodes(Graph* g, int i) {
     return nodes;
 }
 
-vector<int> findOpen(Graph* g) {
+vector<int> findOpen(Graph* g, std::set<int> gotten) {
     vector<int> opens;
-    set<int> added;
 
-    for (int i = 0; i < g->getLength(); i++) {
-        for (int j = 0; j < g->getLength(); j++) {
-            if (g->areConnected(i, j) && added.count(j) == 0) {
-                opens.push_back(j);
-                added.insert(j);
-            }
-        }
-    }
+    for (int i = 0; i < g->getLength(); i++)
+        if (gotten.count(i) == 0)
+            opens.push_back(i);
 
     return opens;
 }
@@ -67,18 +61,21 @@ std::vector<std::tuple<int, int>> findPairing(Graph* g) {
     Graph* copy = copyGraph(g);
 
     std::vector<std::tuple<int, int>> pairs;
+    std::set<int> gotten;
     for (int i = 0; i < copy->getLength(); i++) {
         std::vector<int> nodes = findNodes(copy, i);
         int target;
 
         if (nodes.size() == 0) {
-            std::vector<int> opens = findOpen(copy);
+            std::vector<int> opens = findOpen(copy, gotten);
             target = opens[randMax(opens.size())];
         } else
             target = nodes[randMax(nodes.size())];
 
         pairs.push_back(make_tuple(i, target));
+        gotten.insert(target);
 
+        copy->disconnectDir(target, i);
         for (int j = 0; j < copy->getLength(); j++)
             copy->disconnectDir(j, target);
     }
