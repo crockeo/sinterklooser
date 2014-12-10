@@ -11,26 +11,41 @@
 //////////
 // Code //
 
-// TODO: Implement each part.
-
 // Loading the length.
 int loadLength() {
+    int length = 0;
 
+    while (length == 0) {
+        std::cout << "Enter the number of people:\n > ";
+        std::cin >> length;
+    }
+
+    return length;
 }
 
 // Loading the names.
-std::vector<std::string> loadNames() {
+std::vector<std::string> loadNames(int length) {
+    std::vector<std::string> names;
+    std::string name;
 
+    for (int i = 0; i < length; i++) {
+        std::cout << "Enter name " << (i + 1) << ":\n > ";
+        std::cin >> name;
+        names.push_back(name);
+    }
+
+    return names;
 }
 
 // Loading the edges.
 std::vector<Edge> loadEdges() {
-
+    std::vector<Edge> edges;
+    return edges;
 }
 
 // Loading the path.
 std::string loadPath() {
-
+    return "";
 }
 
 // The entry point to the application.
@@ -39,7 +54,7 @@ int main(int argc, char** argv) {
               << "Follow the instructions below to get started!\n";
 
     int len = loadLength();
-    std::vector<std::string> names = loadNames();
+    std::vector<std::string> names = loadNames(len);
     std::vector<Edge> edges = loadEdges();
     std::string path = loadPath();
 
