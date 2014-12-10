@@ -71,13 +71,23 @@ int saveDigraph(std::string path, Digraph* graph) {
     if (!out.good())
         return -1;
 
+    // Writing the header.
+    out << "SS\n";
+
+    // Writing the size.
     out << graph->getNames().size() << "\n";
 
+    // Writing the names header.
     out << "NAMES\n";
+
+    // Writing then names
     for (int i = 0; i < graph->getNames().size(); i++)
         out << graph->getName(i) << "\n";
 
+    // Writing the connections header.
     out << "CONNS\n";
+
+    // Writing the connections.
     std::set<Edge> edges = graph->getEdges();
     for (std::set<Edge>::iterator it = edges.begin(); it != edges.end(); it++)
         out << it->src << " " << it->dst << " " << it->weight << "\n";
