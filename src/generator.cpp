@@ -45,7 +45,10 @@ std::vector<Edge> loadEdges() {
 
 // Loading the path.
 std::string loadPath() {
-    return "";
+    std::string path;
+    std::cout << "Enter load path:\n > ";
+    std::cin >> path;
+    return path;
 }
 
 // The entry point to the application.
@@ -53,17 +56,22 @@ int main(int argc, char** argv) {
     std::cout << "Welcome to the digraph generator!\n"
               << "Follow the instructions below to get started!\n";
 
+    // Getting all of the values.
     int len = loadLength();
     std::vector<std::string> names = loadNames(len);
     std::vector<Edge> edges = loadEdges();
     std::string path = loadPath();
 
+    // Constructing the graph.
     Digraph* g = new Digraph(names);
     for (std::vector<Edge>::iterator it = edges.begin(); it != edges.end(); it++) {
         g->connect(it->src, it->dst, it->weight);
     }
 
+    // Writing it out.
     saveDigraph(path, g);
+
+    // Cleaning up.
     delete g;
     return 0;
 }
