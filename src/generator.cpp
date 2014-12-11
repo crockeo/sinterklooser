@@ -46,7 +46,7 @@ std::vector<Edge> loadEdges() {
 // Loading the path.
 std::string loadPath() {
     std::string path;
-    std::cout << "Enter load path:\n > ";
+    std::cout << "Enter save path:\n > ";
     std::cin >> path;
     return path;
 }
