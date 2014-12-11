@@ -18,6 +18,9 @@ public:
     // Constructing a Digraph with a list of names.
     Digraph(std::vector<std::string>);
 
+    // A copy constructor for a Digraph.
+    Digraph(const Digraph&);
+
     // Constructing a Digraph without a list of names.
     Digraph();
 

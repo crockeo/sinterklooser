@@ -20,6 +20,17 @@ Digraph::Digraph(std::vector<std::string> names) {
    this->edges = new std::set<Edge>;
 }
 
+// A copy constructor for a Digraph.
+Digraph::Digraph(const Digraph& copyFrom) {
+    this->names = new std::vector<std::string>;
+    for (auto it = copyFrom.names->begin(); it != copyFrom.names->end(); it++)
+        this->names->push_back(*it);
+
+    this->edges = new std::set<Edge>;
+    for (auto it = copyFrom.edges->begin(); it != copyFrom.edges->end(); it++)
+        this->edges->insert(*it);
+}
+
 // Constructing a Digraph without a list of names.
 Digraph::Digraph() {
     this->names = new std::vector<std::string>;
