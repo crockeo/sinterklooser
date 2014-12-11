@@ -14,7 +14,7 @@
 // Code //
 
 // Making a copy of a Digraph.
-Digraph copyGraph(Digraph* const g) {
+Digraph copyDigraph(Digraph* const g) {
     Digraph copy(g->getNames());
 
     std::set<Edge> edges = g->getEdges();
