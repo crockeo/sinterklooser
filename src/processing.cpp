@@ -34,8 +34,14 @@ Digraph copyDigraph(Digraph* const g) {
 }
 
 // Getting a set of edges from a digraph with a source n.
-std::vector<Edge> getEdges(Digraph g, int src) {
+std::vector<Edge> getEdges(Digraph g, std::set<int> selected, int src) {
+    std::set<Edge> gEdges = g.getEdges();
     std::vector<Edge> edges;
+
+    for (auto it = gEdges.begin(); it != gEdges.end(); it++)
+        if (it->src == src && selected.count(it->dst) == 0)
+            edges.push_back(*it);
+
     return edges;
 }
 
@@ -61,19 +67,21 @@ std::vector<std::tuple<int, int>> findPairing(Digraph* const graph) {
     Digraph copy = copyDigraph(graph);
     std::set<Edge> origEdges = copy.getEdges();
 
+    std::set<int> selected;
     std::vector<std::tuple<int, int>> pairs;
     for (int i = 0; i < copy.getNames().size(); i++) {
-        std::vector<Edge> edges = getEdges(copy, i);
+        std::vector<Edge> edges = getEdges(copy, selected, i);
         std::vector<Edge> sorted = sortEdges(edges);
         int max = maxNum(sorted);
 
+        Edge selEdge(0, 0, 0);
         if (max == 0) {
-            // TODO: Other
             continue;
-        } else {
-            Edge selected = edges[randMax(maxNum(sortEdges(edges)))];
-            pairs.push_back(std::make_tuple(selected.src, selected.dst));
-        }
+        } else
+            selEdge = edges[randMax(maxNum(sortEdges(edges)))];
+
+        pairs.push_back(std::make_tuple(selEdge.src, selEdge.dst));
+        selected.insert(selEdge.dst);
     }
 
     return pairs;
