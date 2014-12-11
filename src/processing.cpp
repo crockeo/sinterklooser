@@ -21,7 +21,13 @@ std::vector<std::tuple<int, int>> findPairing(Digraph* graph) {
 
 // Printing out the set of pairings.
 void printPairing(Digraph* graph, std::vector<std::tuple<int, int>> pairs) {
-
+    std::cout << "Pairing list:\n";
+    for (auto it = pairs.begin(); it != pairs.end(); it++)
+        std::cout << " "
+                  << graph->getName(std::get<0>(*it))
+                  << " gets "
+                  << graph->getName(std::get<1>(*it))
+                  << "\n";
 }
 
 //using std::make_tuple;
