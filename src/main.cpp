@@ -22,7 +22,11 @@ int main(int argc, char** argv) {
         return 2;
     }
 
-    printPairing(g, findPairing(g));
+    auto pairing = findPairing(g);
+    if (pairing.size() == 0)
+        std::cout << "There were no pairings found!\n";
+    else
+        printPairing(g, pairing);
 
     delete g;
     return 0;
