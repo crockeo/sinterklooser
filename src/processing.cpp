@@ -62,21 +62,35 @@ int maxNum(std::vector<Edge> edges) {
     return edges.size();
 }
 
+// Finding open spots.
+std::vector<int> findOpens(std::set<int> edges, int curr, int len) {
+    std::vector<int> opens;
+    for (int i = 0; i < len; i++)
+        if (i != curr && edges.count(i) == 0)
+            opens.push_back(i);
+    return opens;
+}
+
 // Determining the list of pairs for Sinterklaas.
 std::vector<std::tuple<int, int>> findPairing(Digraph* const graph) {
     Digraph copy = copyDigraph(graph);
     std::set<Edge> origEdges = copy.getEdges();
 
+    int len = copy.getNames().size();
     std::set<int> selected;
     std::vector<std::tuple<int, int>> pairs;
-    for (int i = 0; i < copy.getNames().size(); i++) {
+    for (int i = 0; i < len; i++) {
         std::vector<Edge> edges = getEdges(copy, selected, i);
         std::vector<Edge> sorted = sortEdges(edges);
         int max = maxNum(sorted);
 
         Edge selEdge(0, 0, 0);
         if (max == 0) {
-            continue;
+            std::vector<int> opens = findOpens(selected, i, len);
+            if (opens.size() == 0)
+                continue;
+
+            selEdge = Edge(i, opens[randMax(opens.size())], 0);
         } else
             selEdge = edges[randMax(maxNum(sortEdges(edges)))];
 
