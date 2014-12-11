@@ -62,14 +62,18 @@ std::vector<std::tuple<int, int>> findPairing(Digraph* const graph) {
     std::set<Edge> origEdges = copy.getEdges();
 
     std::vector<std::tuple<int, int>> pairs;
-    std::vector<Edge> edges;
-
     for (int i = 0; i < copy.getNames().size(); i++) {
-        edges = getEdges(copy, i);
-        Edge selected = edges[randMax(maxNum(sortEdges(edges)))];
-        pairs.push_back(std::make_tuple(selected.src, selected.dst));
+        std::vector<Edge> edges = getEdges(copy, i);
+        std::vector<Edge> sorted = sortEdges(edges);
+        int max = maxNum(sorted);
 
-        // TODO: Some stuff with trimming repeats.
+        if (max == 0) {
+            // TODO: Other
+            continue;
+        } else {
+            Edge selected = edges[randMax(maxNum(sortEdges(edges)))];
+            pairs.push_back(std::make_tuple(selected.src, selected.dst));
+        }
     }
 
     return pairs;
