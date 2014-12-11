@@ -40,8 +40,6 @@ Digraph* loadDigraph(std::string path) {
     std::vector<std::string> names;
     for (int i = 0; i < len; i++) {
         in >> line;
-        in >> line;
-
         names.push_back(line);
     }
 

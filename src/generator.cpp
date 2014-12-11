@@ -40,6 +40,32 @@ std::vector<std::string> loadNames(int length) {
 // Loading the edges.
 std::vector<Edge> loadEdges() {
     std::vector<Edge> edges;
+    int src, dst, weight;
+
+    while (true) {
+        std::cout << "Enter edge (enter '-1' for any of these to quit):\n";
+
+        std::cout<< " | Enter source number:\n    > ";
+        std::cin >> src;
+
+        if (src == -1)
+            break;
+
+        std::cout << " | Enter destination number:\n    > ";
+        std::cin >> dst;
+
+        if (dst == -1)
+            break;
+
+        std::cout << " | Enter weight:\n    > ";
+        std::cin >> weight;
+
+        if (weight == -1)
+            break;
+
+        edges.push_back(Edge(src - 1, dst - 1, weight));
+    }
+
     return edges;
 }
 
