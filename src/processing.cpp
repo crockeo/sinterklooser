@@ -14,12 +14,12 @@
 // Code //
 
 // Making a copy of a Digraph.
-Digraph* const copyGraph(Digraph* const g) {
-    Digraph* const copy = new Digraph(g->getNames());
+Digraph copyGraph(Digraph* const g) {
+    Digraph copy(g->getNames());
 
     std::set<Edge> edges = g->getEdges();
     for (auto it = edges.begin(); it != edges.end(); it++)
-        copy->connect(it->src, it->dst, it->weight);
+        copy.connect(it->src, it->dst, it->weight);
 
     return copy;
 }
