@@ -2,7 +2,9 @@
 
 //////////////
 // Includes //
+#include <algorithm>
 #include <iostream>
+#include <iterator>
 #include <stdlib.h>
 #include <vector>
 #include <tuple>
@@ -12,6 +14,13 @@
 
 //////////
 // Code //
+
+// Getting a random number with some cap.
+int randMax(int n) {
+    if (n <= 0)
+        std::cout << "TRYING TO RAND <= 0!!!\n";
+    return rand() % n;
+}
 
 // Making a copy of a Digraph.
 Digraph copyDigraph(Digraph* const g) {
@@ -24,9 +33,45 @@ Digraph copyDigraph(Digraph* const g) {
     return copy;
 }
 
+// Getting a set of edges from a digraph with a source n.
+std::vector<Edge> getEdges(Digraph g, int src) {
+    std::vector<Edge> edges;
+    return edges;
+}
+
+// Sorting a vector of edges by weight (in descending order).
+std::vector<Edge> sortEdges(std::vector<Edge> edges) {
+    std::sort(edges.begin(), edges.end(), [](const Edge& e1, const Edge& e2) {
+        return e1.weight > e2.weight;
+    });
+
+    return edges;
+}
+
+// Getting the number of maximum weights from an edge.
+int maxNum(std::vector<Edge> edges) {
+    for (int j = 0; j < edges.size(); j++)
+        if (edges[j].weight != edges[0].weight)
+            return j + 1;
+    return edges.size();
+}
+
 // Determining the list of pairs for Sinterklaas.
-std::vector<std::tuple<int, int>> findPairing(Digraph* graph) {
+std::vector<std::tuple<int, int>> findPairing(Digraph* const graph) {
+    Digraph copy = copyDigraph(graph);
+    std::set<Edge> origEdges = copy.getEdges();
+
     std::vector<std::tuple<int, int>> pairs;
+    std::vector<Edge> edges;
+
+    for (int i = 0; i < copy.getNames().size(); i++) {
+        edges = getEdges(copy, i);
+        Edge selected = edges[randMax(maxNum(sortEdges(edges)))];
+        pairs.push_back(std::make_tuple(selected.src, selected.dst));
+
+        // TODO: Some stuff with trimming repeats.
+    }
+
     return pairs;
 }
 
@@ -40,80 +85,3 @@ void printPairing(Digraph* graph, std::vector<std::tuple<int, int>> pairs) {
                   << graph->getName(std::get<1>(*it))
                   << "\n";
 }
-
-//using std::make_tuple;
-//using std::vector;
-//using std::tuple;
-//using std::get;
-//using std::set;
-
-//// Getting a random number with a max value.
-//int randMax(int n) { return rand() % n; }
-
-//// Making a copy of a graph.
-//Graph* copyGraph(Graph* g) {
-    //Graph* copy = new Graph(g->getNames(), g->getLength());
-
-    //for (int i = 0; i < g->getLength(); i++)
-        //for (int j = 0; j < g->getLength(); j++)
-            //if (g->areConnected(i, j))
-                //copy->connect(i, j);
-
-    //return copy;
-//}
-
-//// Creating an array of nodes that are connected to another node.
-//std::vector<int> findNodes(Graph* g, int i) {
-    //std::vector<int> nodes;
-
-    //for (int j = 0; j < g->getLength(); j++)
-        //if (g->areConnected(i, j))
-            //nodes.push_back(j);
-
-    //return nodes;
-//}
-
-//vector<int> findOpen(Graph* g, std::set<int> gotten) {
-    //vector<int> opens;
-
-    //for (int i = 0; i < g->getLength(); i++)
-        //if (gotten.count(i) == 0)
-            //opens.push_back(i);
-
-    //return opens;
-//}
-
-//// Determining the list of pairs for Sinterklaas.
-//std::vector<std::tuple<int, int>> findPairing(Graph* g) {
-    //Graph* copy = copyGraph(g);
-
-    //std::vector<std::tuple<int, int>> pairs;
-    //std::set<int> gotten;
-    //for (int i = 0; i < copy->getLength(); i++) {
-        //std::vector<int> nodes = findNodes(copy, i);
-        //int target;
-
-        //if (nodes.size() == 0) {
-            //std::vector<int> opens = findOpen(copy, gotten);
-            //target = opens[randMax(opens.size())];
-        //} else
-            //target = nodes[randMax(nodes.size())];
-
-        //pairs.push_back(make_tuple(i, target));
-        //gotten.insert(target);
-
-        //copy->disconnectDir(target, i);
-        //for (int j = 0; j < copy->getLength(); j++)
-            //copy->disconnectDir(j, target);
-    //}
-
-    //delete copy;
-    //return pairs;
-//}
-
-//// Printing out the set of pairings.
-//void printPairing(Graph* g, std::vector<std::tuple<int, int>> pairs) {
-    //std::cout << "Pairing list:\n";
-    //for (int i = 0; i < pairs.size(); i++)
-        //std::cout << "  " << g->getName(get<0>(pairs[i])) << " gets " << g->getName(get<1>(pairs[i])) << "!\n";
-//}
