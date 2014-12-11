@@ -13,6 +13,17 @@
 //////////
 // Code //
 
+// Making a copy of a Digraph.
+Digraph* const copyGraph(Digraph* const g) {
+    Digraph* const copy = new Digraph(g->getNames());
+
+    std::set<Edge> edges = g->getEdges();
+    for (auto it = edges.begin(); it != edges.end(); it++)
+        copy->connect(it->src, it->dst, it->weight);
+
+    return copy;
+}
+
 // Determining the list of pairs for Sinterklaas.
 std::vector<std::tuple<int, int>> findPairing(Digraph* graph) {
     std::vector<std::tuple<int, int>> pairs;
