@@ -22,6 +22,9 @@ struct Node {
     // Disconnecting this node from another node.
     void disconnect(Node*);
 
+    // Getting the weight of the node (number of nodes that are connected to it).
+    int getWeight();
+
     // The unique ID of the Node.
     int id;
 

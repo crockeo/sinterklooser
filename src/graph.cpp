@@ -2,6 +2,7 @@
 
 //////////////
 // Includes //
+#include <limits.h>
 #include <string>
 
 #include "node.hpp"
@@ -79,3 +80,21 @@ std::string* Graph::getNames() { return this->names; }
 
 // Getting a specific node.
 Node Graph::getNode(int index) { return this->nodes[index]; }
+
+// Getting the node with the minimum weight.
+Node Graph::getMinimumNode() {
+    Node minNode, curr;
+    int min = INT_MAX;
+    int tmp;
+
+    for (int i = 0; i < this->length; i++) {
+        curr = this->nodes[i];
+        int tmp = curr.getWeight();
+        if (tmp < min) {
+            min = tmp;
+            minNode = curr;
+        }
+    }
+
+    return minNode;
+}

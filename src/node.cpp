@@ -2,6 +2,7 @@
 
 //////////////
 // Includes //
+#include <limits.h>
 #include <set>
 
 //////////
@@ -27,4 +28,15 @@ void Node::connect(Node* node) {
 // Disconnecting this node from another node.
 void Node::disconnect(Node* node) {
     this->nodes->erase(node);
+}
+
+// Getting the weight of the node (number of nodes that are connected to it).
+int Node::getWeight() {
+    int n = 0;
+    for (auto it = this->nodes->begin(); it != this->nodes->end(); it++)
+        n++;
+
+    if (n == 0)
+        return INT_MAX;
+    return n;
 }

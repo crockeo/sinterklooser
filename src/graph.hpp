@@ -47,6 +47,9 @@ public:
 
     // Getting a specific node.
     Node getNode(int);
+
+    // Getting the node with the minimum weight.
+    Node getMinimumNode();
 private:
     int length;
     std::string* names;
