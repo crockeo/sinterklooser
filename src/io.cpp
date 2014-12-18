@@ -50,8 +50,7 @@ Graph loadGraph(std::string path) {
         in >> t1;
         in >> t2;
 
-        g.addEdge(t1, t2, 1);
-        g.addEdge(t2, t1, 1);
+        g.connect(t1, t2, 1);
     }
 
     in.close();
