@@ -33,28 +33,27 @@ Graph::Graph(int size, std::vector<std::string> names) {
 }
 
 // Adding an edge.
-int Graph::addEdge(const Edge& e) {
-    this->edges.insert(e);
-}
-
-int Graph::addEdge(int src, int dst, int weight) {
-    return this->addEdge(Edge(src, dst, weight));
-}
+void Graph::addEdge(const Edge& e) { this->edges.insert(e); }
+void Graph::addEdge(int src, int dst, int weight) { this->addEdge(Edge(src, dst, weight)); }
 
 // Removing an edge.
-int Graph::removeEdge(const Edge& e) {
-    return 0;
+void Graph::removeEdge(const Edge& e) { this->edges.erase(e); }
+void Graph::removeEdge(int src, int dst) { this->removeEdge(Edge(src, dst, 0)); }
+
+// Connecting two nodes.
+void Graph::connect(int src, int dst, int weight) {
+    this->addEdge(src, dst, weight);
+    this->addEdge(dst, src, weight);
 }
 
-int Graph::removeEdge(int src, int dst) {
-    return this->removeEdge(Edge(src, dst, 0));
+// Disconnecting two nodes.
+void Graph::disconnect(int src, int dst) {
+    this->removeEdge(src, dst);
+    this->removeEdge(dst, src);
 }
 
 // Determining the connection of two nodes.
-int Graph::connected(int src, int dst) const {
-    Edge e(src, dst, 0);
-    return this->edges.find(e)->weight;
-}
+int Graph::connected(int src, int dst) const { return this->edges.find(Edge(src, dst, 0))->weight; }
 
 // Getting the size of the graph.
 int Graph::getSize() const { return this->size; }

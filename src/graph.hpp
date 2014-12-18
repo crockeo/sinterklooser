@@ -33,12 +33,18 @@ public:
     Graph(int, std::vector<std::string>);
 
     // Adding an edge.
-    int addEdge(const Edge&);
-    int addEdge(int, int, int);
+    void addEdge(const Edge&);
+    void addEdge(int, int, int);
 
     // Removing an edge.
-    int removeEdge(const Edge&);
-    int removeEdge(int, int);
+    void removeEdge(const Edge&);
+    void removeEdge(int, int);
+
+    // Connecting two nodes.
+    void connect(int, int, int);
+
+    // Disconnecting two nodes.
+    void disconnect(int, int);
 
     // Determining the connection of two nodes.
     int connected(int, int) const;
