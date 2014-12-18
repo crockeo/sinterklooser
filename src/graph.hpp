@@ -46,6 +46,10 @@ public:
     // Disconnecting two nodes.
     void disconnect(int, int);
 
+    // Determining the weight of a given node (based on how many strong
+    // connections it has.)
+    int nodeWeight(int) const;
+
     // Determining the connection of two nodes.
     int connected(int, int) const;
 

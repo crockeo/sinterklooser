@@ -52,8 +52,27 @@ void Graph::disconnect(int src, int dst) {
     this->removeEdge(dst, src);
 }
 
+// Determining the weight of a given node (based on how many strong
+// connections it has.)
+int Graph::nodeWeight(int src) const {
+    if (src >= this->getSize())
+        return -1;
+
+    int n;
+    for (int i = 0; i < this->getSize(); i++)
+        n += this->connected(src, i);
+
+    return n;
+}
+
 // Determining the connection of two nodes.
-int Graph::connected(int src, int dst) const { return this->edges.find(Edge(src, dst, 0))->weight; }
+int Graph::connected(int src, int dst) const {
+    auto e = this->edges.find(Edge(src, dst, 0));
+    if (e == this->edges.end())
+        return 0;
+
+    return e->weight;
+}
 
 // Getting the size of the graph.
 int Graph::getSize() const { return this->size; }
