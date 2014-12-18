@@ -14,36 +14,35 @@
 void testGraph() {
     std::cout << "TEST 01\n";
     int len = 5;
-    std::string* names = new std::string[len];
+    std::vector<std::string> names;
 
-    names[0] = "Cerek";
-    names[1] = "Jibben";
-    names[2] = "Remer";
-    names[3] = "Monique";
-    names[4] = "Michael";
+    names.push_back("Cerek");
+    names.push_back("Jibben");
+    names.push_back("Remer");
+    names.push_back("Monique");
+    names.push_back("Michael");
 
-    Graph* g = new Graph(names, len);
-    delete[] names;
-
-    for (int i = 0; i < g->getLength(); i++)
-        for (int j = 0; j < g->getLength(); j++)
-            if (i != j)
-                g->connect(i, j);
+    Graph g(len, names);
+    for (int i = 0; i < g.getSize(); i++) {
+        for (int j = 0; j < g.getSize(); j++) {
+            if (i != j) {
+                g.addEdge(i, j, 1);
+                g.addEdge(j, i, 1);
+            }
+        }
+    }
 
     coutGraph(g);
-
-    delete g;
 }
 
 void loadGraph() {
     std::cout << "TEST 02\n";
     std::string path = "examples/data02.txt";
 
-    Graph* g = loadGraph(path);
+    Graph g = loadGraph(path);
 
-    if (g != nullptr) {
+    if (g.getSize() > 0) {
         coutGraph(g);
-        delete g;
     } else {
         std::cerr << "Could not load '" << path << "'!\n";
     }
@@ -53,16 +52,14 @@ void testProcess() {
     std::cout << "TEST 03\n";
     std::string path = "examples/data01.txt";
 
-    Graph* g = loadGraph(path);
+    Graph g = loadGraph(path);
 
-    if (g == nullptr) {
-        std::cerr << "Could ont load " << path << "!\n";
+    if (g.getSize() == 0) {
+        std::cerr << "Could not load " << path << "!\n";
         return;
     }
 
     printPairing(g, findPairing(g));
-
-    delete g;
 }
 
 int main() {

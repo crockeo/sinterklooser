@@ -11,12 +11,12 @@
 // Code //
 
 // Loading a graph from a file.
-Graph* loadGraph(std::string);
+Graph loadGraph(std::string);
 
 // Saving a graph to the file system.
-int saveGraph(std::string, Graph*);
+int saveGraph(std::string, const Graph&);
 
 // Writing a graph to std out.
-int coutGraph(Graph*);
+int coutGraph(const Graph&);
 
 #endif

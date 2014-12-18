@@ -12,9 +12,9 @@
 // Code //
 
 // Determining the list of pairs for Sinterklaas.
-std::vector<std::tuple<int, int>> findPairing(Graph*);
+std::vector<std::tuple<int, int>> findPairing(Graph);
 
 // Printing out the set of pairings.
-void printPairing(Graph*, std::vector<std::tuple<int, int>>);
+void printPairing(const Graph&, std::vector<std::tuple<int, int>>);
 
 #endif

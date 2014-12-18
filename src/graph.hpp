@@ -26,11 +26,11 @@ class Graph {
 private:
     int size;
     std::vector<std::string> names;
-    std::set<Edge> nodes;
+    std::set<Edge> edges;
 
 public:
     // Constructing a graph.
-    Graph(int);
+    Graph(int, std::vector<std::string>);
 
     // Adding an edge.
     int addEdge(const Edge&);
@@ -41,13 +41,13 @@ public:
     int removeEdge(int, int);
 
     // Determining the connection of two nodes.
-    int connected(int, int);
+    int connected(int, int) const;
 
     // Getting the size of the graph.
-    int getSize();
+    int getSize() const;
 
     // Getting a name at an index.
-    std::string getName(int);
+    std::string getName(int) const;
 };
 
 #endif

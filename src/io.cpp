@@ -12,12 +12,12 @@
 // Code //
 
 // Loading a graph from a file.
-Graph* loadGraph(std::string path) {
+Graph loadGraph(std::string path) {
     std::ifstream in;
     in.open(path);
 
     if (!in.good())
-        return nullptr;
+        return Graph(0, std::vector<std::string>());
 
     std::string line;
     int len;
@@ -27,10 +27,10 @@ Graph* loadGraph(std::string path) {
 
     if (line.compare("NAMES") != 0) {
         in.close();
-        return nullptr;
+        return Graph(0, std::vector<std::string>());
     }
 
-    std::string* names = new std::string[len];
+    std::vector<std::string> names = std::vector<std::string>(len);
     for (int i = 0; i < len; i++) {
         in >> line;
         in >> line;
@@ -41,18 +41,17 @@ Graph* loadGraph(std::string path) {
     in >> line;
     if (line.compare("CONNS") != 0) {
         in.close();
-        delete[] names;
-        return nullptr;
+        return Graph(0, std::vector<std::string>());
     }
 
-    Graph* g = new Graph(names, len);
-
+    Graph g(len, names);
     int t1, t2;
     while (!in.eof()) {
         in >> t1;
         in >> t2;
 
-        g->connect(t1, t2);
+        g.addEdge(t1, t2, 1);
+        g.addEdge(t2, t1, 1);
     }
 
     in.close();
@@ -60,23 +59,23 @@ Graph* loadGraph(std::string path) {
 }
 
 // Saving a graph to the file system.
-int saveGraph(std::string path, Graph* g) {
+int saveGraph(std::string path, const Graph& g) {
     std::ofstream out;
     out.open(path);
 
     if (!out.good())
         return -1;
 
-    out << g->getLength() << "\n";
+    out << g.getSize() << "\n";
 
     out << "NAMES\n";
-    for (int i = 0; i < g->getLength(); i++)
-        out << i << " " << g->getName(i) << "\n";
+    for (int i = 0; i < g.getSize(); i++)
+        out << i << " " << g.getName(i) << "\n";
 
     out << "CONNS\n";
-    for (int i = 0; i < g->getLength(); i++)
-        for (int j = 0; j < g->getLength(); j++)
-            if (g->areConnected(i, j))
+    for (int i = 0; i < g.getSize(); i++)
+        for (int j = 0; j < g.getSize(); j++)
+            if (g.connected(i, j))
                 out << i << " " << j << "\n";
 
     out.close();
@@ -85,14 +84,14 @@ int saveGraph(std::string path, Graph* g) {
 }
 
 // Writing a graph to std out.
-int coutGraph(Graph* g) {
-    for (int i = 0; i < g->getLength(); i++) {
-        std::cout << g->getName(i) << " knows:\n";
-        for (int j = 0; j < g->getLength(); j++) {
+int coutGraph(const Graph& g) {
+    for (int i = 0; i < g.getSize(); i++) {
+        std::cout << g.getName(i) << " knows:\n";
+        for (int j = 0; j < g.getSize(); j++) {
             if (i == j)
                 continue;
-            if (g->areConnected(i, j))
-                std::cout << " - " << g->getName(j) << "\n";
+            if (g.connected(i, j))
+                std::cout << " - " << g.getName(j) << "\n";
         }
 
         std::cout << "---\n\n";

@@ -29,16 +29,16 @@ bool operator<(const Edge& e1, const Edge& e2) {
 Graph::Graph(int size, std::vector<std::string> names) {
     this->size = size;
     this->names = names;
-    this->edges = std::set<Edge>;
+    this->edges = std::set<Edge>();
 }
 
 // Adding an edge.
 int Graph::addEdge(const Edge& e) {
-    return 0;
+    this->edges.insert(e);
 }
 
 int Graph::addEdge(int src, int dst, int weight) {
-    return 0;
+    return this->addEdge(Edge(src, dst, weight));
 }
 
 // Removing an edge.
@@ -47,17 +47,17 @@ int Graph::removeEdge(const Edge& e) {
 }
 
 int Graph::removeEdge(int src, int dst) {
-    return 0;
+    return this->removeEdge(Edge(src, dst, 0));
 }
 
 // Determining the connection of two nodes.
-int Graph::connected(int src, int dst) {
+int Graph::connected(int src, int dst) const {
     Edge e(src, dst, 0);
     return this->edges.find(e)->weight;
 }
 
 // Getting the size of the graph.
-int Graph::getSize() { return this->size; }
+int Graph::getSize() const { return this->size; }
 
 // Getting a name at an index.
-std::string Graph::getName(int index) { return this->names[index]; }
+std::string Graph::getName(int index) const { return this->names[index]; }
