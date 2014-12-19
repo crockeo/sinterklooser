@@ -87,6 +87,7 @@ std::vector<std::tuple<int, int>> findPairing(Graph g) {
         target = conns[maxRand(conns.size())];
         ns.push_back(std::make_tuple(i, target));
 
+        g.removeEdge(target, i);
         gotten.insert(target);
     }
 
