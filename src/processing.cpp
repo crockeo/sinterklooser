@@ -13,64 +13,77 @@
 //////////
 // Code //
 
-using std::make_tuple;
-using std::vector;
-using std::tuple;
-using std::get;
-using std::set;
+//using std::make_tuple;
+//using std::vector;
+//using std::tuple;
+//using std::get;
+//using std::set;
 
-// Getting a random number with a max value.
-int randMax(int n) { return rand() % n; }
+//// Getting a random number with a max value.
+//int randMax(int n) { return rand() % n; }
 
-// Creating an array of nodes that are connected to another node.
-std::vector<int> findNodes(const Graph& g, int i) {
-    std::vector<int> nodes;
+//// Creating an array of nodes that are connected to another node.
+//std::vector<int> findNodes(const Graph& g, int i) {
+    //std::vector<int> nodes;
 
-    for (int j = 0; j < g.getSize(); j++)
-        if (g.connected(i, j))
-            nodes.push_back(j);
+    //for (int j = 0; j < g.getSize(); j++)
+        //if (g.connected(i, j))
+            //nodes.push_back(j);
 
-    return nodes;
-}
+    //return nodes;
+//}
 
-vector<int> findOpen(const Graph& g, std::set<int> gotten) {
-    vector<int> opens;
+//vector<int> findOpen(const Graph& g, std::set<int> gotten) {
+    //vector<int> opens;
 
-    for (int i = 0; i < g.getSize(); i++)
-        if (gotten.count(i) == 0)
-            opens.push_back(i);
+    //for (int i = 0; i < g.getSize(); i++)
+        //if (gotten.count(i) == 0)
+            //opens.push_back(i);
 
-    return opens;
-}
+    //return opens;
+//}
+
+//// Determining the list of pairs for Sinterklaas.
+//std::vector<std::tuple<int, int>> findPairing(Graph g) {
+    //std::vector<std::tuple<int, int>> pairs;
+    //std::set<int> gotten;
+    //for (int i = 0; i < g.getSize(); i++) {
+        //std::vector<int> nodes = findNodes(g, i);
+        //int target;
+
+        //if (nodes.size() == 0) {
+            //std::vector<int> opens = findOpen(g, gotten);
+            //target = opens[randMax(opens.size())];
+        //} else
+            //target = nodes[randMax(nodes.size())];
+
+        //pairs.push_back(make_tuple(i, target));
+        //gotten.insert(target);
+
+        //g.removeEdge(target, i);
+        //for (int j = 0; j < g.getSize(); j++)
+            //g.removeEdge(j, target);
+    //}
+
+    //return pairs;
+//}
+
+//// Printing out the set of pairings.
+//void printPairing(const Graph& g, std::vector<std::tuple<int, int>> pairs) {
+    //std::cout << "Pairing list:\n";
+    //for (int i = 0; i < pairs.size(); i++)
+        //std::cout << "  " << g.getName(get<0>(pairs[i])) << " gets " << g.getName(get<1>(pairs[i])) << "!\n";
+//}
 
 // Determining the list of pairs for Sinterklaas.
 std::vector<std::tuple<int, int>> findPairing(Graph g) {
-    std::vector<std::tuple<int, int>> pairs;
-    std::set<int> gotten;
-    for (int i = 0; i < g.getSize(); i++) {
-        std::vector<int> nodes = findNodes(g, i);
-        int target;
-
-        if (nodes.size() == 0) {
-            std::vector<int> opens = findOpen(g, gotten);
-            target = opens[randMax(opens.size())];
-        } else
-            target = nodes[randMax(nodes.size())];
-
-        pairs.push_back(make_tuple(i, target));
-        gotten.insert(target);
-
-        g.removeEdge(target, i);
-        for (int j = 0; j < g.getSize(); j++)
-            g.removeEdge(j, target);
-    }
-
-    return pairs;
+    std::vector<std::tuple<int, int>> ns;
+    return ns;
 }
 
 // Printing out the set of pairings.
 void printPairing(const Graph& g, std::vector<std::tuple<int, int>> pairs) {
-    std::cout << "Pairing list:\n";
-    for (int i = 0; i < pairs.size(); i++)
-        std::cout << "  " << g.getName(get<0>(pairs[i])) << " gets " << g.getName(get<1>(pairs[i])) << "!\n";
+    std::cout << "Pairings!\n";
+    for (auto it = pairs.begin(); it != pairs.end(); it++)
+        std::cout << " " << g.getName(std::get<0>(*it)) << " got " << g.getName(std::get<1>(*it)) << "!\n";
 }
