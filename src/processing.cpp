@@ -36,6 +36,35 @@ std::vector<int> notGotten(const Graph& g, const std::set<int>& gotten) {
     return ng;
 }
 
+// Determining the maximum-weight connection a given node has.
+int maxWeight(const Graph& g, int n, const std::vector<int>& conns) {
+    int max = -1;
+    int conn;
+
+    for (auto it = conns.begin(); it != conns.end(); it++) {
+        conn = g.connected(n, *it);
+        if (conn > max)
+            max = conn;
+    }
+
+    return max;
+}
+
+// Returns a vector of the highest-weight nodes connected to this one.
+std::vector<int> maxWeights(const Graph& g, int n, const std::vector<int>& conns) {
+    int max = maxWeight(g, n, conns);
+    std::vector<int> weights;
+    int conn;
+
+    for (auto it = conns.begin(); it != conns.end(); it++) {
+        conn = g.connected(n, *it);
+        if (conn == max)
+            weights.push_back(*it);
+    }
+
+    return weights;
+}
+
 // Determining the list of pairs for Sinterklaas.
 std::vector<std::tuple<int, int>> findPairing(Graph g) {
     std::vector<std::tuple<int, int>> ns;
@@ -53,7 +82,8 @@ std::vector<std::tuple<int, int>> findPairing(Graph g) {
             std::cout << "WHOOPS.\n";
             return ns;
         }
-        
+
+        conns = maxWeights(g, i, conns);
         target = conns[maxRand(conns.size())];
         ns.push_back(std::make_tuple(i, target));
 
