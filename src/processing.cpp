@@ -75,6 +75,17 @@
         //std::cout << "  " << g.getName(get<0>(pairs[i])) << " gets " << g.getName(get<1>(pairs[i])) << "!\n";
 //}
 
+// Finding all of the connections a given node on a Graph contains.
+std::vector<int> findConnections(const Graph& g, int src) {
+    std::vector<int> conns;
+
+    for (int i = 0; i < g.getSize(); i++)
+        if (g.connected(src, i))
+            conns.push_back(i);
+
+    return conns;
+}
+
 // Determining the list of pairs for Sinterklaas.
 std::vector<std::tuple<int, int>> findPairing(Graph g) {
     std::vector<std::tuple<int, int>> ns;
