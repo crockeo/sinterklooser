@@ -33,8 +33,6 @@ Graph loadGraph(std::string path) {
     std::vector<std::string> names = std::vector<std::string>(len);
     for (int i = 0; i < len; i++) {
         in >> line;
-        in >> line;
-
         names[i] = line;
     }
 
@@ -45,12 +43,13 @@ Graph loadGraph(std::string path) {
     }
 
     Graph g(len, names);
-    int t1, t2;
+    int t1, t2, weight;
     while (!in.eof()) {
         in >> t1;
         in >> t2;
+        in >> weight;
 
-        g.connect(t1, t2, 1);
+        g.connect(t1, t2, weight);
     }
 
     in.close();

@@ -6,14 +6,14 @@ a '#' are to be treated as comments.
 
 <number of people>
 NAMES
-<person id 1> <person name 1>
-<person id 2> <person name 2>
+<person name 1>
+<person name 2>
 # ...
-<person id n> <person name n>
+<person name n>
 CONNS
 # The 'n's in the following should specify which people are to be treated as
 # connected in this problem.
-<person id n> <person id n>
-<person id n> <person id n>
-<person id n> <person id n>
+<person id n> <person id n> <conn weight>
+<person id n> <person id n> <conn weight>
+<person id n> <person id n> <conn weight>
 # etc.
